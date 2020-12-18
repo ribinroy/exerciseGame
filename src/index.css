@@ -288,7 +288,8 @@ img.userlogoImage {
     background: linear-gradient(to right, #7a6eee, #b3abff);
 }
 
-.jeopardy-card.grad .jeopardy-link, .jeopardy-card.grad h2 {
+.jeopardy-card.grad .jeopardy-link,
+.jeopardy-card.grad h2 {
     color: white !important;
 }
 
