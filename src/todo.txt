@@ -1,0 +1,10 @@
+Make the relevant squares into clickable YouTube links
+
+Add cute icons for each of the categories
+
+Add audio when the timer runs out
+
+Persist all of the data via localStorage
+Add a score that can update: perhaps a form that you can use to add to the score
+Remove the history and simplify to Jeopardy board, team names, scores
+Set up the timer so that it can input the amount of start time

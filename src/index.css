@@ -1,0 +1,334 @@
+body {
+    font: 20px 'Century Gothic', Futura, sans-serif;
+    margin: 0 5%;
+    /*background-image: url("background.jpg");*/
+}
+
+.jeopardy {
+    float: left;
+    width: 100%;
+}
+
+.jeopardy-table {
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    /*text-align: center;*/
+}
+
+.category-row,
+.jeopardy-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.team-a {
+    float: left;
+    height: 20%;
+    margin-left: 18%;
+}
+
+.team-b {
+    float: right;
+    text-align: right;
+    /*margin-left: 80%;*/
+    height: 20%;
+    margin-right: 18%;
+}
+
+.timer {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.timer-display {
+    font-size: 36px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.timer-config {
+    display: flex;
+    flex-direction: row;
+}
+
+.history {
+    text-align: center;
+}
+
+.history-table {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+}
+
+.top-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.bottom-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.leftboxtext {
+    width: 100%;
+    height: 9vh;
+    float: left;
+    color: #fff;
+    text-align: center;
+}
+
+.innertext {
+    margin: auto;
+}
+
+.bottommaindiv {
+    height: 15vh;
+    float: left;
+    width: 100%;
+    padding: 3%;
+}
+
+.userText {
+    height: 6vh;
+    color: #fff;
+    padding: 3%;
+    min-height: 45px;
+    display: flex;
+    align-items: center;
+    padding: 0 2vmin;
+    justify-content: space-between;
+    font-size: 1.8vmin;
+}
+
+.userPoints {
+    float: right;
+    margin-left: 10px;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.userlogoImage {
+    height: calc(50% - 6vh);
+    min-height: 230px !important;
+}
+
+.category {
+    width: 25%;
+    text-align: center;
+    padding: 0;
+    /* padding-bottom: 0.5em; */
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.categoryName {
+    width: 100%;
+    font-size: 2.4vmin;
+    font-weight: 400;
+    color: #fff;
+    padding: 15px;
+    background-color: #7a6eee;
+}
+
+.bottomleft {
+    width: 20%;
+    position: absolute;
+    left: 50px;
+}
+.curs-pointer {
+    cursor: pointer;
+}
+.bottomcenter {
+    width: 60%;
+}
+
+.bottomicons {
+    margin: auto;
+    width: -moz-fit-content;
+    width: fit-content;
+}
+
+.bottomiconimg {
+    border: 1px solid #c0c0c0;
+    padding: 8px;
+    margin-right: 10px;
+    border-radius: 50px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    object-fit: contain;
+    object-position: center;
+}
+
+.copyimg {
+    width: 5%;
+    float: left;
+}
+
+.copytext {
+    float: left;
+    padding-left: 3%;
+    font-size: 0.8em;
+    color: #999999;
+}
+
+.catimgitem {
+    height: 14vh;
+    min-height: 100px !important;
+    object-fit: cover;
+    object-position: center;
+}
+
+.jeopardy-card {
+    width: 25%;
+    height: 10vh;
+    cursor: pointer;
+    min-height: 60px !important;
+    color: #000;
+    background-color: #fff;
+    text-align: center;
+    /*border-radius: 10px;*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1em 25px;
+    border: 1.5px solid #7a6eee;
+    font-size: 24px;
+}
+
+.jeopardy-card h2 {
+    font-weight: 400 !important;
+    font-size: 3.5vmin !important;
+    color: #7c7a91;
+}
+
+.jeopardy-card:hover {
+    border: 4px solid #7a6eee;
+}
+
+.team-name,
+.score {
+    font-size: 45px;
+    margin: 20px 0;
+}
+
+.team-members {
+    font-size: 20px;
+}
+
+.maindiv {
+    min-width: 1200px !important;
+}
+
+.jeopardy-link {
+    /* color: white; */
+    font-size: 2.2vmin;
+    color: #7c7a91 !important;
+    text-decoration: underline;
+}
+
+.leftmaindiv {
+    width: 80%;
+    float: left;
+    padding: 3%;
+    padding-bottom: 3%;
+    /* height: 85vh; */
+    background-image: url(/src/Images/backdrop.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 550px !important;
+    padding-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.rightmaindiv {
+    width: 20%;
+    float: left;
+    /* height: 85vh; */
+    min-height: 550px !important;
+    display: flex;
+    flex-direction: column;
+    /* height: 100%; */
+}
+
+img.userlogoImage {
+    object-fit: cover;
+    object-position: center;
+}
+
+.grad.grad1 {
+    background: linear-gradient(to right, #ff8993, #fec180);
+}
+
+.grad.grad2 {
+    background: linear-gradient(to right, #679fe4, #34ebe9);
+}
+
+.grad.grad3 {
+    background: linear-gradient(to right, #7a6eee, #b3abff);
+}
+
+.jeopardy-card.grad .jeopardy-link, .jeopardy-card.grad h2 {
+    color: white !important;
+}
+
+.topMainWrap {
+    float: left;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: row;
+    min-height: calc(100% - 100px);
+}
+
+.bottomMainWrap {
+    float: left;
+    width: 100%;
+    position: relative;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.maindiv {
+    float: left;
+    width: 100%;
+    height: 100%;
+}
+
+div#root {
+    float: left;
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+}
+
+.innertext {
+    font-size: 2.4vmin;
+}
+
+img.bottomiconimg:hover {
+    box-shadow: 0px 0px 10px #c9c9c985;
+}
