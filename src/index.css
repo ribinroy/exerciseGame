@@ -215,6 +215,10 @@ body {
     min-height: 230px !important;
 }
 
+.userText label.name-label {
+    margin-top: 0.8vmin;
+}
+
 .category {
     width: 25%;
     text-align: center;
