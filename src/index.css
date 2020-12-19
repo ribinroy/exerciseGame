@@ -173,6 +173,15 @@ div#ModalHeader {
     justify-content: space-between;
 }
 
+.picker-container .picker-inner{
+    width: 34%;
+    margin-left: 33%;
+}
+
+.picker-container .picker-column .picker-item {
+    text-overflow: inherit !important;
+}
+
 .leftboxtext {
     width: 100%;
     height: 9vh;
