@@ -71,6 +71,7 @@ class Game extends React.Component {
             open: false,
             showTab: false,
             popupHead: '',
+            popupExercise: '',
             popupLink: ''
         };
     }
@@ -226,7 +227,7 @@ class Game extends React.Component {
                 this.updateTimerStatus(false);
             }
             console.log(squares[r][c]);
-            this.setState({ squares: squares, open: true, showTab: false, popupHead: squares[r][c].number, popupLink: squares[r][c].link }, this.pushStateUpdate);
+            this.setState({ squares: squares, open: true, showTab: false, popupHead: squares[r][c].number, popupLink: squares[r][c].link, popupExercise: squares[r][c].text }, this.pushStateUpdate);
         };
     }
 
@@ -395,7 +396,10 @@ class Game extends React.Component {
                                     aria-labelledby="ModalHeader"
                                     >
                                     <Modal.Header closeButton>
-                                        <Modal.Title id='ModalHeader'>{ this.state.popupHead }</Modal.Title>
+                                        <Modal.Title id='ModalHeader'>
+                                            <div className="weightage">{ this.state.popupHead } Points</div>
+                                            <div className="exercise">{ this.state.popupExercise }</div>
+                                        </Modal.Title>
                                     </Modal.Header>
                                     <Modal.Body>
                                         {/* <video className="video-container video-container-overlay" autoPlay="" loop="" muted="" data-reactid=".0.1.0.0">
