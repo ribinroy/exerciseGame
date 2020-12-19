@@ -6,6 +6,7 @@ import io from 'socket.io-client';
 import EditableLabel from './EditableLabel';
 import Card from './Card';
 import Timer from './Timer';
+import Slider from './Slider';
 import BackgroundImageLegs from './Images/whm012220lavenderset-015-1583933144.png';
 import BackgroundImageArms from './Images/dumbbell-exercises-1577465289.png';
 import BackgroundImageCore from './Images/30-day-challenge-sldl-lb-wo0-1576613501.png';
@@ -19,7 +20,8 @@ import call from './Images/phone-call (2).png';
 import novideo from './Images/Group 8.png';
 import unmute from './Images/microphone-black-shape.png';
 import video from './Images/video-player.png';
-
+import { Modal } from 'react-bootstrap';
+import ReactPlayer from "react-player";
 import './index.css';
 import 'react-bootstrap';
 import './bootstrap.min.css';
@@ -57,6 +59,7 @@ const BOARD_DATA =
 class Game extends React.Component {
     constructor(props) {
         super(props);
+        this.showwinnerTab = this.showwinnerTab.bind(this);
         this.state = {
             isMute: false,
             isVideo: false,
@@ -65,6 +68,10 @@ class Game extends React.Component {
             categories: [],
             squares: [],
             timerIsActive: false,
+            open: false,
+            showTab: false,
+            popupHead: '',
+            popupLink: ''
         };
     }
 
@@ -72,6 +79,12 @@ class Game extends React.Component {
         if (this.state.timerIsActive !== status) {
             this.setState({ timerIsActive: status });
         }
+    }
+
+    closeModal(){
+        this.setState({
+            open: false
+        });
     }
 
     updateGame() {
@@ -184,6 +197,10 @@ class Game extends React.Component {
         return currentTurn;
     }
 
+    showwinnerTab(){
+        this.setState({ showTab: true });
+    }
+
     getSquareUpdater(r, c) {
         return () => {
             const squares = this.state.squares.slice();
@@ -208,8 +225,8 @@ class Game extends React.Component {
             } else {
                 this.updateTimerStatus(false);
             }
-
-            this.setState({ squares: squares }, this.pushStateUpdate);
+            console.log(squares[r][c]);
+            this.setState({ squares: squares, open: true, showTab: false, popupHead: squares[r][c].number, popupLink: squares[r][c].link }, this.pushStateUpdate);
         };
     }
 
@@ -244,7 +261,7 @@ class Game extends React.Component {
         const squares = this.state.squares.slice();
         squares[row][col].winner = winner;
         squares[row][col].status = 0;
-        this.setState({ squares: squares }, this.pushStateUpdate);
+        this.setState({ squares: squares, showTab: false, open: false }, this.pushStateUpdate);
     }
 
     render() {
@@ -262,30 +279,30 @@ class Game extends React.Component {
 
                 return (
                     <div className='popup-wrap'>
-                        <div className='innertext'>
-                            {title} Select the winner:
+                        <div className='remngtime'>
+                            Select the winner
                         </div>
                         <button
-                            className='grad grad1'
+                            className='usernamebtnbox grad grad1'
                             onClick={() => this.setWinner(1)}>
                             {this.getPlayerName(1)}
                         </button>
                         <button
-                            className='grad grad2'
+                            className='usernamebtnbox grad grad2'
                             onClick={() => this.setWinner(2)}>
                             {this.getPlayerName(2)}
                         </button>
                         <button
-                            className='grad grad3'
+                            className='usernamebtnbox grad grad3'
                             onClick={() => this.setWinner(3)}>
-                            Tie
+                            Tied
                         </button>
-                        <Timer
+                        {/* <Timer
                             seconds={30}
                             timerIsActive={this.state.timerIsActive}
                             onStartTimer={() => socket.emit('start_timer')}
                             onEndTimer={() => this.updateTimerStatus(false)}
-                        />
+                        /> */}
                     </div>
                 );
             } else {
@@ -372,10 +389,32 @@ class Game extends React.Component {
                                         </div>
                                     ))}
                                 </div>
+                                <Modal
+                                    show={this.state.open}
+                                    onHide={()=>this.closeModal()}
+                                    aria-labelledby="ModalHeader"
+                                    >
+                                    <Modal.Header closeButton>
+                                        <Modal.Title id='ModalHeader'>{ this.state.popupHead }</Modal.Title>
+                                    </Modal.Header>
+                                    <Modal.Body>
+                                        {/* <video className="video-container video-container-overlay" autoPlay="" loop="" muted="" data-reactid=".0.1.0.0">
+                                        </video> */}
+                                        {/* <video src={video} width="750" height="500" controls>
+                                            <source type="video/mp4" data-reactid=".0.1.0.0.0" src="https://www.youtube.com/watch?v=h3h035Eyz5A" />
+                                        </video> */}
+                                        <ReactPlayer controls={false} embedOptions={false}
+                                            url={ this.state.popupLink }
+                                        />
+                                        { this.state.showTab ? 
+                                            belowBoard() : 
+                                            <Slider callback={this.showwinnerTab.bind(this)} />
+                                        }                                        
+                                    </Modal.Body>
+                                </Modal>                
                             </div>
                         </div>
                         <div className='leftboxtext d-flex align-items-center'>
-                            {belowBoard()}
                         </div>
                     </div>
                     <div className='rightmaindiv'>

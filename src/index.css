@@ -17,6 +17,64 @@ body {
     /*text-align: center;*/
 }
 
+.modal.show .modal-dialog {
+    width: 40% !important;
+    transform: none;
+    max-width: 60% !important;
+    margin-left: 20% !important;
+    margin-top: 3% !important;
+}
+
+.modal-body > div {
+    width: 100% !important;
+}
+
+.remngtime{
+    text-align: center;
+    color: #909090;
+    margin-top: 2%;
+}
+
+.usernamebtnbox{
+    width: 30%;
+    margin-left: 3%;
+    margin-top: 2%;
+    padding: 1%;
+    color: #fff;
+    font-weight: 600;
+    border: 0px;
+}
+
+.displayedTime h1{
+    color: #7a6eee;
+    text-align: center;
+    margin-top: 1%;
+}
+
+.btnform{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btnbox{
+    padding: 1% 7%;
+    color: #fff;
+    background-color: #34ebe9;
+    border: 1px solid;
+    font-weight: 600;
+    font-size: 1em;
+    border-radius: 5px;
+}
+
+.ytp-gradient-top{
+    display: none !important;
+}
+
+.ytp-chrome-top{
+    display: none !important;
+}
+
 .category-row,
 .jeopardy-row {
     display: flex;
@@ -120,7 +178,7 @@ body {
 .userPoints {
     float: right;
     margin-left: 10px;
-    font-size: 22px;
+    /* font-size: 22px; */
     font-weight: bold;
 }
 

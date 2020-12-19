@@ -3,13 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@mobiscroll/react-lite": "^4.10.6",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.21.0",
+    "mobiscroll-react": "^4.0.0",
     "react": "^16.13.1",
     "react-bootstrap": "^1.4.0",
+    "react-bootstrap-modal": "^4.2.0",
+    "react-countdown-circle-timer": "^2.3.7",
     "react-dom": "^16.13.1",
+    "react-player": "^2.7.2",
     "react-scripts": "^4.0.1",
     "socket.io-client": "^2.3.1"
   },
