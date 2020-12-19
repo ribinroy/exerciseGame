@@ -6,9 +6,11 @@ export default class Slider extends React.Component {
         super();
         this.state = {
             time: {},
-            seconds: 10,
+            seconds: 0,
             showbtn: true,
-            selectedTimer: { minute: 1, seconds: 5 },
+            selectedmin: 0,
+            selectedsec: 0,
+            valueGroups: { minute: 0, seconds: 0 },
         };
         this.timer = 0;
         this.startTimer = this.startTimer.bind(this);
@@ -38,10 +40,16 @@ export default class Slider extends React.Component {
     }
 
     startTimer() {
-        this.setState({ showbtn: false });
+        const totalsec = this.state.valueGroups.minute * 60 + this.state.valueGroups.seconds;
+        this.setState({ seconds: totalsec });
         if (this.timer === 0 && this.state.seconds > 0) {
             this.timer = setInterval(this.countDown, 1000);
         }
+        this.activateTimer();
+    }
+
+    activateTimer(){
+      this.setState({showbtn: false});
     }
 
     countDown() {
@@ -61,8 +69,16 @@ export default class Slider extends React.Component {
     }
 
     handleRollChange(item, value) {
-        debugger;
-        console.log(this.state);
+      const totalsec = this.state.valueGroups.minute * 60 + this.state.valueGroups.seconds;
+        this.setState(({valueGroups}) => ({
+          valueGroups: {
+            ...valueGroups,
+            [item]: value
+          },
+          seconds: totalsec
+        }));
+
+        console.log(this.state.valueGroups);
     }
 
     render() {
@@ -70,7 +86,7 @@ export default class Slider extends React.Component {
             minute: [],
             seconds: [],
         };
-        for (let i = 1; i <= 60; i++) {
+        for (let i = 0; i <= 60; i++) {
             rollData.minute.push(i);
             rollData.seconds.push(i);
         }
@@ -79,7 +95,15 @@ export default class Slider extends React.Component {
                 <div className='remngtime'>
                     {this.state.showbtn ? 'Select Timer' : 'Remaining Time'}
                 </div>
-                <div className='displayedTime'>
+                { this.state.showbtn ? 
+                  <div className='timer-roll'>
+                    <Picker
+                        optionGroups={rollData}
+                        valueGroups={this.state.valueGroups}
+                        onChange={this.handleRollChange.bind(this)}
+                    />
+                  </div> :         
+                  <div className='displayedTime'>
                     <h1>
                         {this.state.time.m < 10
                             ? `0${this.state.time.m}`
@@ -89,17 +113,11 @@ export default class Slider extends React.Component {
                             ? `0${this.state.time.s}`
                             : this.state.time.s}
                     </h1>
-                </div>
+                  </div>     
+                }
                 {/* <Input onSetCountdown={this.handleCountdown.bind(this)}/> */}
                 <form ref='form' className='btnform flex-column'>
                     {/* <input type="text" ref="seconds" placeholder="enter time in seconds"/> */}
-                    <div className='timer-roll'>
-                        <Picker
-                            optionGroups={rollData}
-                            valueGroups={this.state.selectedTimer}
-                            onChange={this.handleRollChange}
-                        />
-                    </div>
                     {this.state.showbtn ? (
                         <button className='btnbox' onClick={this.startTimer}>
                             Start Now
