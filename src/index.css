@@ -82,6 +82,10 @@ div#ModalHeader {
     justify-content: center;
 }
 
+.flex-row {
+    flex-direction: row;
+}
+
 .btnbox {
     padding: 1% 7%;
     color: #fff;
@@ -438,4 +442,26 @@ div#root {
 
 img.bottomiconimg:hover {
     box-shadow: 0px 0px 10px #c9c9c985;
+}
+
+.picker-column:focus {
+    outline: none !important;
+}
+
+.picker-scroller:focus {
+    outline: none !important;
+}
+
+.picker-container {
+    height: 100px !important;
+}
+
+.picker-scroller {
+    margin-top: -60px;
+}
+
+.picker-item.picker-item-selected {
+    color: #7a6eee !important;
+    font-size: 1.7rem;
+    font-weight: 600;
 }
