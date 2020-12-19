@@ -305,7 +305,7 @@ class Game extends React.Component {
                             {this.getPlayerName(2)}
                         </button>
                         <button
-                            className='usernamebtnbox grad grad3'
+                            className='usernamebtnbox'
                             onClick={() => this.setWinner(3)}>
                             Tied
                         </button>

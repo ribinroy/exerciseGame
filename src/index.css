@@ -31,7 +31,7 @@ body {
 
 .modal-body .video-player {
     margin-left: -1rem;
-    width: calc(100% + 2rem) !important;
+    width: calc(100% + 2rem + 1px) !important;
     max-height: 280px;
 }
 
@@ -41,6 +41,7 @@ body {
 
 .modal-body {
     margin-top: 15px;
+    padding-bottom: 1.5rem !important;
 }
 
 div#ModalHeader {
@@ -50,8 +51,6 @@ div#ModalHeader {
 }
 
 .remngtime {
-    text-align: center;
-    color: #909090;
     margin-top: 2%;
 }
 
@@ -59,10 +58,16 @@ div#ModalHeader {
     width: 30%;
     margin-left: 3%;
     margin-top: 2%;
-    padding: 1%;
+    padding: 1.7%;
     color: #fff;
     font-weight: 600;
     border: 0px;
+    border-radius: 4px;
+    background-color: #979797;
+}
+
+.usernamebtnbox:focus {
+    outline: none !important;
 }
 
 .displayedTime h1 {
@@ -194,7 +199,8 @@ div#ModalHeader {
     font-weight: 700;
 }
 
-.exercise {
+.exercise,
+.remngtime {
     text-align: center;
     font-weight: 500;
     font-size: 15px;
