@@ -3,7 +3,12 @@ import React from 'react';
 export default class Slider extends React.Component {
     constructor() {
         super();
-        this.state = { time: {}, seconds: 900, showbtn: true };
+        this.state = {
+            time: {},
+            seconds: 10,
+            showbtn: true,
+            selectedMin: false,
+        };
         this.timer = 0;
         this.startTimer = this.startTimer.bind(this);
         this.countDown = this.countDown.bind(this);
@@ -54,10 +59,16 @@ export default class Slider extends React.Component {
         }
     }
 
+    handleRollChange() {
+        // debugger;
+    }
+
     render() {
         return (
             <div className='container'>
-                <div className='remngtime'>Remaining Time</div>
+                <div className='remngtime'>
+                    {this.state.showbtn ? 'Select Timer' : 'Remaining Time'}
+                </div>
                 <div className='displayedTime'>
                     <h1>
                         {this.state.time.m < 10
