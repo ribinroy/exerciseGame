@@ -40,16 +40,18 @@ export default class Slider extends React.Component {
     }
 
     startTimer() {
-        const totalsec = this.state.valueGroups.minute * 60 + this.state.valueGroups.seconds;
-        this.setState({ seconds: totalsec });
+        // const totalsec =
+        //     this.state.valueGroups.minute * 60 + this.state.valueGroups.seconds;
+        // this.setState({ seconds: totalsec });
         if (this.timer === 0 && this.state.seconds > 0) {
+            this.countDown();
             this.timer = setInterval(this.countDown, 1000);
         }
         this.activateTimer();
     }
 
-    activateTimer(){
-      this.setState({showbtn: false});
+    activateTimer() {
+        this.setState({ showbtn: false });
     }
 
     countDown() {
@@ -69,16 +71,19 @@ export default class Slider extends React.Component {
     }
 
     handleRollChange(item, value) {
-      const totalsec = this.state.valueGroups.minute * 60 + this.state.valueGroups.seconds;
-        this.setState(({valueGroups}) => ({
-          valueGroups: {
-            ...valueGroups,
-            [item]: value
-          },
-          seconds: totalsec
+        let totalsec = 1;
+        if (item === 'seconds') {
+            totalsec = totalsec + this.state.valueGroups.minute * 60 + value;
+        } else if (item === 'minute') {
+            totalsec = totalsec + value * 60 + this.state.valueGroups.seconds;
+        }
+        this.setState(({ valueGroups }) => ({
+            valueGroups: {
+                ...valueGroups,
+                [item]: value,
+            },
+            seconds: totalsec,
         }));
-
-        console.log(this.state.valueGroups);
     }
 
     render() {
@@ -86,7 +91,7 @@ export default class Slider extends React.Component {
             minute: [],
             seconds: [],
         };
-        for (let i = 0; i <= 60; i++) {
+        for (let i = 0; i < 60; i++) {
             rollData.minute.push(i);
             rollData.seconds.push(i);
         }
@@ -95,26 +100,27 @@ export default class Slider extends React.Component {
                 <div className='remngtime'>
                     {this.state.showbtn ? 'Select Timer' : 'Remaining Time'}
                 </div>
-                { this.state.showbtn ? 
-                  <div className='timer-roll'>
-                    <Picker
-                        optionGroups={rollData}
-                        valueGroups={this.state.valueGroups}
-                        onChange={this.handleRollChange.bind(this)}
-                    />
-                  </div> :         
-                  <div className='displayedTime'>
-                    <h1>
-                        {this.state.time.m < 10
-                            ? `0${this.state.time.m}`
-                            : this.state.time.m}{' '}
-                        :{' '}
-                        {this.state.time.s < 10
-                            ? `0${this.state.time.s}`
-                            : this.state.time.s}
-                    </h1>
-                  </div>     
-                }
+                {this.state.showbtn ? (
+                    <div className='timer-roll'>
+                        <Picker
+                            optionGroups={rollData}
+                            valueGroups={this.state.valueGroups}
+                            onChange={this.handleRollChange.bind(this)}
+                        />
+                    </div>
+                ) : (
+                    <div className='displayedTime'>
+                        <h1>
+                            {this.state.time.m < 10
+                                ? `0${this.state.time.m}`
+                                : this.state.time.m}{' '}
+                            :{' '}
+                            {this.state.time.s < 10
+                                ? `0${this.state.time.s}`
+                                : this.state.time.s}
+                        </h1>
+                    </div>
+                )}
                 {/* <Input onSetCountdown={this.handleCountdown.bind(this)}/> */}
                 <form ref='form' className='btnform flex-column'>
                     {/* <input type="text" ref="seconds" placeholder="enter time in seconds"/> */}

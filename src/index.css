@@ -173,7 +173,7 @@ div#ModalHeader {
     justify-content: space-between;
 }
 
-.picker-container .picker-inner{
+.picker-container .picker-inner {
     width: 34%;
     margin-left: 33%;
 }
@@ -330,6 +330,7 @@ div#ModalHeader {
     padding: 1em 25px;
     border: 1.5px solid #7a6eee;
     font-size: 24px;
+    /* background-color: #979797; */
 }
 
 .jeopardy-card h2 {
@@ -404,7 +405,8 @@ img.userlogoImage {
 }
 
 .grad.grad3 {
-    background: linear-gradient(to right, #7a6eee, #b3abff);
+    /* background: linear-gradient(to right, #7a6eee, #b3abff); */
+    background-color: #979797;
 }
 
 .jeopardy-card.grad .jeopardy-link,
@@ -484,6 +486,7 @@ img.bottomiconimg:hover {
 }
 
 .timer-roll {
+    margin: 10px 0;
     position: relative;
 }
 
