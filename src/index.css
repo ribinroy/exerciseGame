@@ -17,12 +17,12 @@ body {
     /*text-align: center;*/
 }
 
-.modal.show .modal-dialog {
+.modal-dialog {
     width: 40% !important;
     transform: none;
     max-width: 60% !important;
     margin-left: 20% !important;
-    margin-top: 3% !important;
+    margin-top: 4% !important;
 }
 
 .modal-body > div {
@@ -37,6 +37,16 @@ body {
 
 .modal-header {
     border-bottom: 0px !important;
+}
+
+.modal-body {
+    margin-top: 15px;
+}
+
+div#ModalHeader {
+    position: absolute;
+    left: 0;
+    top: 10px;
 }
 
 .remngtime {
@@ -180,7 +190,7 @@ body {
 .weightage {
     width: 100%;
     text-align: center;
-    margin-bottom: 5px;
+    /* margin-bottom: 5px; */
     font-weight: 700;
 }
 
