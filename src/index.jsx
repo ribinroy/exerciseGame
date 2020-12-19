@@ -21,7 +21,7 @@ import novideo from './Images/Group 8.png';
 import unmute from './Images/microphone-black-shape.png';
 import video from './Images/video-player.png';
 import { Modal } from 'react-bootstrap';
-import ReactPlayer from "react-player";
+import ReactPlayer from 'react-player';
 import './index.css';
 import 'react-bootstrap';
 import './bootstrap.min.css';
@@ -72,7 +72,7 @@ class Game extends React.Component {
             showTab: false,
             popupHead: '',
             popupExercise: '',
-            popupLink: ''
+            popupLink: '',
         };
     }
 
@@ -82,9 +82,9 @@ class Game extends React.Component {
         }
     }
 
-    closeModal(){
+    closeModal() {
         this.setState({
-            open: false
+            open: false,
         });
     }
 
@@ -198,7 +198,7 @@ class Game extends React.Component {
         return currentTurn;
     }
 
-    showwinnerTab(){
+    showwinnerTab() {
         this.setState({ showTab: true });
     }
 
@@ -227,7 +227,17 @@ class Game extends React.Component {
                 this.updateTimerStatus(false);
             }
             console.log(squares[r][c]);
-            this.setState({ squares: squares, open: true, showTab: false, popupHead: squares[r][c].number, popupLink: squares[r][c].link, popupExercise: squares[r][c].text }, this.pushStateUpdate);
+            this.setState(
+                {
+                    squares: squares,
+                    open: true,
+                    showTab: false,
+                    popupHead: squares[r][c].number,
+                    popupLink: squares[r][c].link,
+                    popupExercise: squares[r][c].text,
+                },
+                this.pushStateUpdate
+            );
         };
     }
 
@@ -262,7 +272,10 @@ class Game extends React.Component {
         const squares = this.state.squares.slice();
         squares[row][col].winner = winner;
         squares[row][col].status = 0;
-        this.setState({ squares: squares, showTab: false, open: false }, this.pushStateUpdate);
+        this.setState(
+            { squares: squares, showTab: false, open: false },
+            this.pushStateUpdate
+        );
     }
 
     render() {
@@ -280,9 +293,7 @@ class Game extends React.Component {
 
                 return (
                     <div className='popup-wrap'>
-                        <div className='remngtime'>
-                            Select the winner
-                        </div>
+                        <div className='remngtime'>Select the winner</div>
                         <button
                             className='usernamebtnbox grad grad1'
                             onClick={() => this.setWinner(1)}>
@@ -392,13 +403,16 @@ class Game extends React.Component {
                                 </div>
                                 <Modal
                                     show={this.state.open}
-                                    onHide={()=>this.closeModal()}
-                                    aria-labelledby="ModalHeader"
-                                    >
+                                    onHide={() => this.closeModal()}
+                                    aria-labelledby='ModalHeader'>
                                     <Modal.Header closeButton>
                                         <Modal.Title id='ModalHeader'>
-                                            <div className="weightage">{ this.state.popupHead } Points</div>
-                                            <div className="exercise">{ this.state.popupExercise }</div>
+                                            <div className='weightage'>
+                                                {this.state.popupHead} Points
+                                            </div>
+                                            <div className='exercise'>
+                                                {this.state.popupExercise}
+                                            </div>
                                         </Modal.Title>
                                     </Modal.Header>
                                     <Modal.Body>
@@ -407,19 +421,26 @@ class Game extends React.Component {
                                         {/* <video src={video} width="750" height="500" controls>
                                             <source type="video/mp4" data-reactid=".0.1.0.0.0" src="https://www.youtube.com/watch?v=h3h035Eyz5A" />
                                         </video> */}
-                                        <ReactPlayer controls={false} embedOptions={false}
-                                            url={ this.state.popupLink }
+                                        <ReactPlayer
+                                            controls={false}
+                                            className='video-player'
+                                            embedOptions={false}
+                                            url={this.state.popupLink}
                                         />
-                                        { this.state.showTab ? 
-                                            belowBoard() : 
-                                            <Slider callback={this.showwinnerTab.bind(this)} />
-                                        }                                        
+                                        {this.state.showTab ? (
+                                            belowBoard()
+                                        ) : (
+                                            <Slider
+                                                callback={this.showwinnerTab.bind(
+                                                    this
+                                                )}
+                                            />
+                                        )}
                                     </Modal.Body>
-                                </Modal>                
+                                </Modal>
                             </div>
                         </div>
-                        <div className='leftboxtext d-flex align-items-center'>
-                        </div>
+                        <div className='leftboxtext d-flex align-items-center'></div>
                     </div>
                     <div className='rightmaindiv'>
                         {Array.from(PLAYER_DATA.entries()).map((playerPair) => {
