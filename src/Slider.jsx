@@ -3,7 +3,7 @@ import React from 'react';
 export default class Slider extends React.Component {
   constructor() {
     super();
-    this.state = { time: {}, seconds: 20, showbtn: true };
+    this.state = { time: {}, seconds: 900, showbtn: true };
     this.timer = 0;
     this.startTimer = this.startTimer.bind(this);
     this.countDown = this.countDown.bind(this);
