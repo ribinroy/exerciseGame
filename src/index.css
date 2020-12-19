@@ -17,13 +17,13 @@ body {
     /*text-align: center;*/
 }
 
-/* .modal.show .modal-dialog {
+.modal.show .modal-dialog {
     width: 40% !important;
     transform: none;
     max-width: 60% !important;
     margin-left: 20% !important;
     margin-top: 3% !important;
-} */
+}
 
 .modal-body > div {
     width: 100% !important;
