@@ -37,6 +37,13 @@ export default class Slider extends React.Component {
         return obj;
     }
 
+    componentDidUpdate() {
+        if (!this.props.running) {
+            this.timerAudioFinal.currentTime = 0;
+            this.timerAudioNormal.currentTime = 0;
+            clearInterval(this.timer);
+        }
+    }
     componentDidMount() {
         if (this.props.time === 0 || this.props.time === undefined) {
             this.props.callback();
@@ -66,6 +73,10 @@ export default class Slider extends React.Component {
     }
 
     countDown() {
+        if (!this.props.running) {
+            clearInterval(this.timer);
+            return false;
+        }
         // Remove one second, set state so a re-render happens.
         let seconds = this.state.seconds - 1;
         this.setState({

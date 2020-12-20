@@ -466,6 +466,7 @@ class Game extends React.Component {
                                             belowBoard()
                                         ) : (
                                             <Slider
+                                                running={this.state.open}
                                                 time={this.state.time}
                                                 callback={this.showwinnerTab.bind(
                                                     this
