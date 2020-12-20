@@ -1,9 +1,10 @@
 import React from 'react';
-import Picker from 'react-mobile-picker-scroll';
+import TimerAudioNormal from './Audio/Timer 1 sec.wav';
+import TimerAudioFinal from './Audio/Timer Last 3(5) seconds.wav';
 
 export default class Slider extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             time: {},
             seconds: 0,
@@ -15,6 +16,8 @@ export default class Slider extends React.Component {
         this.timer = 0;
         this.startTimer = this.startTimer.bind(this);
         this.countDown = this.countDown.bind(this);
+        this.timerAudioNormal = new Audio(TimerAudioNormal);
+        this.timerAudioFinal = new Audio(TimerAudioFinal);
     }
 
     secondsToTime(secs) {
@@ -35,7 +38,14 @@ export default class Slider extends React.Component {
     }
 
     componentDidMount() {
-        let timeLeftVar = this.secondsToTime(this.state.seconds);
+        if (this.props.time === 0 || this.props.time === undefined) {
+            this.props.callback();
+        }
+
+        this.timerAudioNormal.currentTime = 0;
+        this.timerAudioFinal.currentTime = 0;
+        this.setState({ seconds: this.props.time });
+        let timeLeftVar = this.secondsToTime(this.props.time);
         this.setState({ time: timeLeftVar });
     }
 
@@ -45,6 +55,7 @@ export default class Slider extends React.Component {
         // this.setState({ seconds: totalsec });
         if (this.timer === 0 && this.state.seconds > 0) {
             this.countDown();
+            this.timerAudioNormal.play();
             this.timer = setInterval(this.countDown, 1000);
         }
         this.activateTimer();
@@ -63,7 +74,17 @@ export default class Slider extends React.Component {
         });
 
         // Check if we're at zero.
+        if (seconds <= 3) {
+            this.timerAudioNormal.play();
+            this.timerAudioNormal.pause();
+            this.timerAudioFinal.currentTime = 0;
+            this.timerAudioFinal.play();
+        } else {
+            this.timerAudioNormal.currentTime = 0;
+            this.timerAudioNormal.play();
+        }
         if (seconds === 0) {
+            this.timerAudioFinal.pause();
             console.log('000000');
             this.props.callback();
             clearInterval(this.timer);
@@ -97,30 +118,18 @@ export default class Slider extends React.Component {
         }
         return (
             <div className='container'>
-                <div className='remngtime'>
-                    {this.state.showbtn ? 'Select Timer' : 'Remaining Time'}
+                <div className='remngtime'>Remaining Time</div>
+                <div className='displayedTime'>
+                    <h1>
+                        {this.state.time.m < 10
+                            ? `0${this.state.time.m}`
+                            : this.state.time.m}{' '}
+                        :{' '}
+                        {this.state.time.s < 10
+                            ? `0${this.state.time.s}`
+                            : this.state.time.s}
+                    </h1>
                 </div>
-                {this.state.showbtn ? (
-                    <div className='timer-roll'>
-                        <Picker
-                            optionGroups={rollData}
-                            valueGroups={this.state.valueGroups}
-                            onChange={this.handleRollChange.bind(this)}
-                        />
-                    </div>
-                ) : (
-                    <div className='displayedTime'>
-                        <h1>
-                            {this.state.time.m < 10
-                                ? `0${this.state.time.m}`
-                                : this.state.time.m}{' '}
-                            :{' '}
-                            {this.state.time.s < 10
-                                ? `0${this.state.time.s}`
-                                : this.state.time.s}
-                        </h1>
-                    </div>
-                )}
                 {/* <Input onSetCountdown={this.handleCountdown.bind(this)}/> */}
                 <form ref='form' className='btnform flex-column'>
                     {/* <input type="text" ref="seconds" placeholder="enter time in seconds"/> */}

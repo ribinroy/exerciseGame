@@ -25,6 +25,8 @@ import ReactPlayer from 'react-player';
 import './index.css';
 import 'react-bootstrap';
 import './bootstrap.min.css';
+import WinnerAudio from './Audio/Winner.wav';
+import KeyPressAudio from './Audio/KeyPressAudio.wav';
 
 const CategoryImageDict = {
     LEGS: BackgroundImageLegs,
@@ -54,7 +56,7 @@ const EDITABLE_SUFFIX = ': enter name here';
 const PLAYER1 = '';
 const PLAYER2 = '';
 const BOARD_DATA =
-    '{"categories": ["LEGS", "ARMS", "CORE", "CARDIO"], "squares": [[{"number": 400, "text": "Squats, 30 secs"}, {"number": 400, "text": "10 push-ups"}, {"number": 400, "text": "Bicycle kicks, 30 secs"}, {"number": 400, "text": "Jumping jacks, 30 secs"}], [{"number": 500, "text": "Tree pose"}, {"number": 500, "text": "25 plank side walks", "link": "https://www.youtube.com/watch?v=hffjRd86Zno&t=10s"}, {"number": 500, "text": "Shoulder tap planks, 60 secs", "link": "https://www.youtube.com/watch?v=QOCn3_iOAro"}, {"number": 500, "text": "30 Skaters", "link": "https://greatist.com/fitness/cardio-bodyweight-exercises#:~:text=13.%20Skaters"}], [{"number": 600, "text": "20 lunges (10 on each side)"}, {"number": 600, "text": "10 rolling push-ups", "link": "https://www.youtube.com/watch?v=Wu5fWBMG20w"}, {"number": 600, "text": "80 Russian twists"}, {"number": 600, "text": "Alternating starfish jumps (30)", "link": "https://www.youtube.com/watch?v=x8vQrqEmAfo"}], [{"number": 700, "text": "High knees, 75 secs"}, {"number": 700, "text": "20 dive bomber push-ups", "link": "https://www.youtube.com/watch?v=mvNcSF-nXg4"}, {"number": 700, "text": "50 crunches"}, {"number": 700, "text": "25 mountain climbers + 25 jumping jacks"}], [{"number": 800, "text": "40 power jacks", "link": "https://www.youtube.com/watch?v=alaZwJE20Ds"}, {"number": 800, "text": "50 commandos", "link": "https://www.youtube.com/watch?v=yD7nl9Hh160"}, {"number": 800, "text": "Longest plank"}, {"number": 800, "text": "25 long jumps with jog back", "link": "https://greatist.com/fitness/cardio-bodyweight-exercises#:~:text=14.%20Long%20jump"}]]}';
+    '{ "categories": ["LEGS", "ARMS", "CORE", "CARDIO"], "squares": [ [ { "time": 0, "number": 400, "text": "Squats, 30 secs", "link": "https://static-10.sinclairstoryline.com/resources/media/e87328a1-cca8-408f-b0bf-a56df96b2ea2-large16x9_GettyImages912603144.jpg" }, { "time": 8, "number": 400, "text": "10 push-ups" }, { "time": 100, "number": 400, "text": "Bicycle kicks, 30 secs" }, { "time": 100, "number": 400, "text": "Jumping jacks, 30 secs" } ], [ { "time": 100, "number": 500, "text": "Tree pose" }, { "time": 100, "number": 500, "text": "25 plank side walks", "link": "https://www.youtube.com/watch?v=hffjRd86Zno&t=10s" }, { "time": 100, "number": 500, "text": "Shoulder tap planks, 60 secs", "link": "https://www.youtube.com/watch?v=QOCn3_iOAro" }, { "time": 150, "number": 500, "text": "30 Skaters", "link": "https://static-10.sinclairstoryline.com/resources/media/e87328a1-cca8-408f-b0bf-a56df96b2ea2-large16x9_GettyImages912603144.jpg" } ], [ { "time": 100, "number": 600, "text": "20 lunges (10 on each side)" }, { "time": 100, "number": 600, "text": "10 rolling push-ups", "link": "https://www.youtube.com/watch?v=Wu5fWBMG20w" }, { "time": 100, "number": 600, "text": "80 Russian twists" }, { "time": 100, "number": 600, "text": "Alternating starfish jumps (30)", "link": "https://www.youtube.com/watch?v=x8vQrqEmAfo" } ], [ { "time": 100, "number": 700, "text": "High knees, 75 secs" }, { "time": 100, "number": 700, "text": "20 dive bomber push-ups", "link": "https://www.youtube.com/watch?v=mvNcSF-nXg4" }, { "time": 100, "number": 700, "text": "50 crunches" }, { "time": 100, "number": 700, "text": "25 mountain climbers + 25 jumping jacks" } ], [ { "time": 100, "number": 800, "text": "40 power jacks", "link": "https://www.youtube.com/watch?v=alaZwJE20Ds" }, { "time": 100, "number": 800, "text": "50 commandos", "link": "https://www.youtube.com/watch?v=yD7nl9Hh160" }, { "time": 100, "number": 800, "text": "Longest plank" }, { "time": 100, "number": 800, "text": "25 long jumps with jog back", "link": "https://static-10.sinclairstoryline.com/resources/media/e87328a1-cca8-408f-b0bf-a56df96b2ea2-large16x9_GettyImages912603144.jpg" } ] ] }';
 
 class Game extends React.Component {
     constructor(props) {
@@ -73,7 +75,10 @@ class Game extends React.Component {
             popupHead: '',
             popupExercise: '',
             popupLink: '',
+            time: 0,
         };
+        this.winnerAudio = new Audio(WinnerAudio);
+        this.keyPressAudio = new Audio(KeyPressAudio);
     }
 
     updateTimerStatus(status) {
@@ -131,6 +136,12 @@ class Game extends React.Component {
         //   console.log('Received start_timer');
         //   this.updateTimerStatus(true);
         // });
+        var _this = this;
+        document.addEventListener('keypress', function () {
+            debugger;
+            _this.keyPressAudio.currentTime = 0;
+            _this.keyPressAudio.play();
+        });
     }
 
     getBoardJson() {
@@ -235,6 +246,7 @@ class Game extends React.Component {
                     popupHead: squares[r][c].number,
                     popupLink: squares[r][c].link,
                     popupExercise: squares[r][c].text,
+                    time: squares[r][c].time,
                 },
                 this.pushStateUpdate
             );
@@ -296,17 +308,26 @@ class Game extends React.Component {
                         <div className='remngtime'>Select the winner</div>
                         <button
                             className='usernamebtnbox grad grad1'
-                            onClick={() => this.setWinner(1)}>
+                            onClick={() => {
+                                this.winnerAudio.play();
+                                this.setWinner(1);
+                            }}>
                             {this.getPlayerName(1)}
                         </button>
                         <button
                             className='usernamebtnbox grad grad2'
-                            onClick={() => this.setWinner(2)}>
+                            onClick={() => {
+                                this.winnerAudio.play();
+                                this.setWinner(2);
+                            }}>
                             {this.getPlayerName(2)}
                         </button>
                         <button
                             className='usernamebtnbox'
-                            onClick={() => this.setWinner(3)}>
+                            onClick={() => {
+                                this.winnerAudio.play();
+                                this.setWinner(3);
+                            }}>
                             Tied
                         </button>
                         {/* <Timer
@@ -421,16 +442,31 @@ class Game extends React.Component {
                                         {/* <video src={video} width="750" height="500" controls>
                                             <source type="video/mp4" data-reactid=".0.1.0.0.0" src="https://www.youtube.com/watch?v=h3h035Eyz5A" />
                                         </video> */}
-                                        <ReactPlayer
-                                            controls={false}
-                                            className='video-player'
-                                            embedOptions={false}
-                                            url={this.state.popupLink}
-                                        />
+                                        {this.state.popupLink &&
+                                        this.state.popupLink.indexOf(
+                                            'https://www.youtube.com/'
+                                        ) >= 0 ? (
+                                            <ReactPlayer
+                                                controls={false}
+                                                className='video-player'
+                                                embedOptions={false}
+                                                url={this.state.popupLink}
+                                            />
+                                        ) : this.state.popupLink ? (
+                                            <img
+                                                className='inside-image'
+                                                alt='game'
+                                                src={this.state.popupLink}
+                                            />
+                                        ) : (
+                                            ''
+                                        )}
+
                                         {this.state.showTab ? (
                                             belowBoard()
                                         ) : (
                                             <Slider
+                                                time={this.state.time}
                                                 callback={this.showwinnerTab.bind(
                                                     this
                                                 )}
